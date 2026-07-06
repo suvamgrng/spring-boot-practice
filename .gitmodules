@@ -1,0 +1,3 @@
+[submodule "spring-security-practice"]
+	path = spring-security-practice
+	url = https://github.com/suvamgrng/spring-security-practice.git
