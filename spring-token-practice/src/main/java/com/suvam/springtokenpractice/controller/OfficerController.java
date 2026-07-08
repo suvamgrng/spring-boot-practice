@@ -10,7 +10,7 @@ public class OfficerController {
 
     @GetMapping("/")
     public String greet(HttpServletRequest request) {
-        return "Hello Officer!!" +request.getSession().getId() ;
+        return "Hello Officer!!" +request.getSession().getId();
     }
 
     @GetMapping("/get-token")
