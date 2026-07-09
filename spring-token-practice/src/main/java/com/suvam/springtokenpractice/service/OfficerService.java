@@ -27,9 +27,9 @@ public class OfficerService {
         return officers;
     }
 
-    //Add a officer
+    //Add an officer
     public Officer addOfficer(Officer officer) {
-        if (officer.i)
         officers.add(officer);
+        return officer;
     }
 }
