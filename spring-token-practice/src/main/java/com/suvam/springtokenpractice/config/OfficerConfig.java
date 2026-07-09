@@ -1,11 +1,15 @@
 package com.suvam.springtokenpractice.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.stereotype.Component;
 
-@Component
+
+@Configuration
+@EnableWebSecurity
 public class OfficerConfig {
 
     @Bean
@@ -21,10 +25,11 @@ public class OfficerConfig {
                         .anyRequest()
                         .authenticated()
                 )
-                .formLogin(login -> login
-                        .defaultSuccessUrl("/officer", true)
-                        .permitAll()
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/")
                 )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .logout(log -> log
                         .logoutSuccessUrl("/logout?logout")
                         .permitAll()
