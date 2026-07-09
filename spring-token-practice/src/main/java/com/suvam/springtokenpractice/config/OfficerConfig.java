@@ -28,8 +28,6 @@ public class OfficerConfig {
                 .formLogin(form -> form
                         .defaultSuccessUrl("/")
                 )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .logout(log -> log
                         .logoutSuccessUrl("/logout?logout")
                         .permitAll()
