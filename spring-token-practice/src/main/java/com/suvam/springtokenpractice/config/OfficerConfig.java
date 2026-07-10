@@ -4,7 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -17,7 +20,6 @@ public class OfficerConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/officer",
                                 "/get-token",
                                 "/"
                         )
@@ -25,13 +27,30 @@ public class OfficerConfig {
                         .anyRequest()
                         .authenticated()
                 )
-                .formLogin(form -> form
-                        .defaultSuccessUrl("/")
-                )
+                .httpBasic(basic -> {})
                 .logout(log -> log
                         .logoutSuccessUrl("/logout?logout")
                         .permitAll()
                 );
         return http.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        //Creating User that lives in Memory
+        UserDetails admin = User.builder()
+                .username("Suvam")
+                .password("{noop}suvam123")
+                .roles("ADMIN")
+                .build();
+
+        UserDetails user = User.builder()
+                .username("Guest")
+                .password("{noop}guest123")
+                .roles("USER")
+                .build();
+
+        //Hand Both ser to the in-memory manager
+        return new InMemoryUserDetailsManager(admin, user);
     }
 }
