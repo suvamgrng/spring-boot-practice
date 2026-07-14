@@ -1,6 +1,7 @@
 package com.suvam.springtokenpractice.service;
 
-import com.suvam.springtokenpractice.model.Officer;
+import com.suvam.springtokenpractice.model.UserPrincipal;
+import com.suvam.springtokenpractice.model.Users;
 import com.suvam.springtokenpractice.repo.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,11 +19,11 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Officer officer = repo.findByUsername(username);
+        Users user = repo.findByUsername(username);
 
-        if (officer == null) {
+        if (user == null) {
             throw  new UsernameNotFoundException("User not found");
         }
-        return null;
+        return new UserPrincipal(user);
     }
 }
