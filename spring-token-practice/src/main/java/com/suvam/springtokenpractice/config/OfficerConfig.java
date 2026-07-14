@@ -60,6 +60,7 @@ public class OfficerConfig {
         return new InMemoryUserDetailsManager(admin, user);
     }
 
+    @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
@@ -67,6 +68,7 @@ public class OfficerConfig {
         return provider;
     }
 
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
