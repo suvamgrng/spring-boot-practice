@@ -1,7 +1,7 @@
-package com.suvam.student.service;
+package com.suvam.teacher.service;
 
-import com.suvam.student.model.Teacher;
-import com.suvam.student.repository.TeacherRepo;
+import com.suvam.teacher.model.Teacher;
+import com.suvam.teacher.repository.TeacherRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class TeacherService {
         this.repo = repo;
     }
 
-    public List<Teacher> getStudent() {
+    public List<Teacher> getTeacher() {
         return repo.findAll();
     }
 }

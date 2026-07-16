@@ -1,4 +1,4 @@
-package com.suvam.student.model;
+package com.suvam.teacher.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

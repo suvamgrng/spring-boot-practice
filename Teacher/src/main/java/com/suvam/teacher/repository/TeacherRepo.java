@@ -1,6 +1,6 @@
-package com.suvam.student.repository;
+package com.suvam.teacher.repository;
 
-import com.suvam.student.model.Teacher;
+import com.suvam.teacher.model.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.ResponseEntity;
 

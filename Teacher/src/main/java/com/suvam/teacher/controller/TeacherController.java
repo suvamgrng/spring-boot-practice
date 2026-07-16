@@ -1,7 +1,7 @@
-package com.suvam.student.controller;
+package com.suvam.teacher.controller;
 
-import com.suvam.student.model.Teacher;
-import com.suvam.student.service.TeacherService;
+import com.suvam.teacher.model.Teacher;
+import com.suvam.teacher.service.TeacherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +22,8 @@ public class TeacherController {
         return "Hello World";
     }
 
-    @GetMapping("/student")
-    public ResponseEntity<List<Teacher>> getStudent() {
-        return ResponseEntity.ok(service.getStudent());
+    @GetMapping("/teacher")
+    public ResponseEntity<List<Teacher>> getTeacher() {
+        return ResponseEntity.ok(service.getTeacher());
     }
 }
