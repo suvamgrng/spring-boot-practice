@@ -17,4 +17,11 @@ public class TeacherService {
     public List<Teacher> getTeacher() {
         return repo.findAll();
     }
+
+    public Teacher addTeacher(Teacher teacher) {
+        if (teacher == null) {
+            return null;
+        }
+        return repo.save(teacher);
+    }
 }
