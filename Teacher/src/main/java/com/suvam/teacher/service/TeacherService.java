@@ -24,4 +24,12 @@ public class TeacherService {
         }
         return repo.save(teacher);
     }
+
+    public Teacher updateTeacher(int id, Teacher teacher) {
+        if (!(repo.existsById(id))) {
+            return null;
+        }
+        return repo.save(teacher);
+    }
+
 }
