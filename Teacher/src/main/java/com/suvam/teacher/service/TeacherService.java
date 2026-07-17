@@ -2,6 +2,7 @@ package com.suvam.teacher.service;
 
 import com.suvam.teacher.model.Teacher;
 import com.suvam.teacher.repository.TeacherRepo;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class TeacherService {
     }
 
     public List<Teacher> getTeacher() {
-        return repo.findAll();
+        return repo.findAll(Sort.by("id"));
     }
 
     public Teacher addTeacher(Teacher teacher) {
@@ -29,6 +30,7 @@ public class TeacherService {
         if (!(repo.existsById(id))) {
             return null;
         }
+        teacher.setId(id);
         return repo.save(teacher);
     }
 
