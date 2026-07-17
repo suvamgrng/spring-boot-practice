@@ -2,7 +2,9 @@ package com.suvam.teacher.controller;
 
 import com.suvam.teacher.model.Teacher;
 import com.suvam.teacher.service.TeacherService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,11 @@ public class TeacherController {
 
     public TeacherController(TeacherService service) {
         this.service = service;
+    }
+
+    @GetMapping("/get-token")
+    public CsrfToken getCsrfToken(HttpServletRequest request) {
+        return (CsrfToken) request.getAttribute("_csrf");
     }
 
     @GetMapping("/")
@@ -31,6 +38,7 @@ public class TeacherController {
         return ResponseEntity.ok(service.addTeacher(teacher));
     }
 
+    @PutMapping("/teacher/{id}")
     public ResponseEntity<Teacher> updateTeacher(@PathVariable int id, @RequestBody Teacher teacher) {
         return ResponseEntity.ok(service.updateTeacher(id, teacher));
     }
