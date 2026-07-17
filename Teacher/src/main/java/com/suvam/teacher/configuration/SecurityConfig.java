@@ -1,10 +1,10 @@
 package com.suvam.teacher.configuration;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
-@Component
+@EnableWebSecurity
 public class SecurityConfig {
 
 }
