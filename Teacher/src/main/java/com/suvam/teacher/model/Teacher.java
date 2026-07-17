@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
     String firstName;
     String lastName;
     String module;
