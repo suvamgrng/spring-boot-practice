@@ -34,4 +34,11 @@ public class TeacherService {
         return repo.save(teacher);
     }
 
+    public boolean deleteTeacher(int id) {
+        if (!(repo.existsById(id))) {
+           return false;
+        }
+        repo.deleteById(id);
+        return true;
+    }
 }

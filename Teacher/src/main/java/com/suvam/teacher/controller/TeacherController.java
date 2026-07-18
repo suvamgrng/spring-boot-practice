@@ -53,4 +53,14 @@ public class TeacherController {
         }
         return ResponseEntity.ok(update);
     }
+
+    @DeleteMapping("/teacher/{id}")
+    public ResponseEntity<Teacher> deleteTeacher(@PathVariable int id) {
+        boolean deleted = service.deleteTeacher(id);
+
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 }
