@@ -40,6 +40,11 @@ public class TeacherController {
 
     @PutMapping("/teacher/{id}")
     public ResponseEntity<Teacher> updateTeacher(@PathVariable int id, @RequestBody Teacher teacher) {
-        return ResponseEntity.ok(service.updateTeacher(id, teacher));
+        Teacher update = service.updateTeacher(id, teacher);
+
+        if (update == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(update);
     }
 }
