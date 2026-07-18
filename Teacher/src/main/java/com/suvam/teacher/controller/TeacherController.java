@@ -35,6 +35,9 @@ public class TeacherController {
 
     @PostMapping("/teacher")
     public ResponseEntity<Teacher> addTeacher(@RequestBody Teacher teacher) {
+        if (teacher == null) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok(service.addTeacher(teacher));
     }
 
@@ -42,8 +45,11 @@ public class TeacherController {
     public ResponseEntity<Teacher> updateTeacher(@PathVariable int id, @RequestBody Teacher teacher) {
         Teacher update = service.updateTeacher(id, teacher);
 
-        if (update == null) {
+        if (teacher == null) {
             return ResponseEntity.badRequest().build();
+        }
+        if (update == null) {
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(update);
     }
