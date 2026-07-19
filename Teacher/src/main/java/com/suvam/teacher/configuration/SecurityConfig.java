@@ -1,5 +1,6 @@
 package com.suvam.teacher.configuration;
 
+import com.suvam.teacher.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -36,19 +37,20 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetails() {
-        UserDetails user = User.builder()
-                .username("amisha")
-                .password("{noop}amisha123")
-                .roles("user")
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
+    //Stored inside RAM
+//    @Bean
+//    public UserDetailsService userDetails() {
+//        UserDetails user = User.builder()
+//                .username("amisha")
+//                .password("{noop}amisha123")
+//                .roles("user")
+//                .build();
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+    public AuthenticationProvider authenticationProvider(CustomUserDetailsService customUserDetailsService) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(customUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
