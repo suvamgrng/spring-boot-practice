@@ -64,12 +64,4 @@ public class TeacherController {
         }
         return ResponseEntity.noContent().build();
     }
-
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody Users user) {
-        if (user == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return ResponseEntity.ok(service.register(user));
-    }
 }
