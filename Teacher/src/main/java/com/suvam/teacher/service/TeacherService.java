@@ -1,7 +1,7 @@
 package com.suvam.teacher.service;
 
 import com.suvam.teacher.model.Teacher;
-import com.suvam.teacher.repository.UsersRepo;
+import com.suvam.teacher.repository.TeacherRepo;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import java.util.List;
 
 @Service
 public class TeacherService {
-    private final UsersRepo repo;
+    private final TeacherRepo repo;
 
-    public TeacherService(UsersRepo repo) {
+    public TeacherService(TeacherRepo repo) {
         this.repo = repo;
     }
 
