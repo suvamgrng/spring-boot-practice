@@ -1,6 +1,7 @@
 package com.suvam.teacher.controller;
 
 import com.suvam.teacher.model.Teacher;
+import com.suvam.teacher.model.Users;
 import com.suvam.teacher.service.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -62,5 +63,13 @@ public class TeacherController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody Users user) {
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(service.register(user));
     }
 }
