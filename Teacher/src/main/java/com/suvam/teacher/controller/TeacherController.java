@@ -1,7 +1,6 @@
 package com.suvam.teacher.controller;
 
 import com.suvam.teacher.model.Teacher;
-import com.suvam.teacher.model.Users;
 import com.suvam.teacher.service.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
