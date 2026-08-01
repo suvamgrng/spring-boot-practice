@@ -20,4 +20,10 @@ public class UsersController {
     public ResponseEntity<String> register(@RequestBody Users user) {
         return ResponseEntity.ok(service.register(user));
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Users user) {
+        System.out.println(user);
+        return "Success";
+    }
 }
