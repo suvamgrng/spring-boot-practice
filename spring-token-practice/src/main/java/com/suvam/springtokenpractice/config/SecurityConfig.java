@@ -25,10 +25,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain addSecurityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception {
         http
+                .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/get-token",
-                                "/"
+                                "/",
+                                "/login",
+                                "/register"
                         )
                         .permitAll()
                         .anyRequest()
