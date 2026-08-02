@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
 
     private final UsersService service;
-
     public UsersController(UsersService service) {
         this.service = service;
     }

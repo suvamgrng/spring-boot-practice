@@ -13,10 +13,13 @@ public class UsersService {
     private final UserRepo repo;
     private final PasswordEncoder encoder;
     private final AuthenticationManager authManager;
-    public UsersService(UserRepo repo, PasswordEncoder encoder, AuthenticationManager authManager) {
+    private final JwtService service;
+
+    public UsersService(UserRepo repo, PasswordEncoder encoder, AuthenticationManager authManager, JwtService service) {
         this.repo = repo;
         this.encoder = encoder;
         this.authManager = authManager;
+        this.service = service;
     }
 
     public String register(Users user) {
@@ -32,7 +35,7 @@ public class UsersService {
                         user.getPassword()
                 ));
 
-        if (authentication.isAuthenticated()) return "Successfully Logged in";
+        if (authentication.isAuthenticated()) return service.generateToken();
         return "Login Failed";
     }
 }
