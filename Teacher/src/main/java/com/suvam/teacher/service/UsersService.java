@@ -2,6 +2,9 @@ package com.suvam.teacher.service;
 
 import com.suvam.teacher.model.Users;
 import com.suvam.teacher.repository.UsersRepo;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +12,12 @@ import org.springframework.stereotype.Service;
 public class UsersService {
     private final UsersRepo repo;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
-    public UsersService(UsersRepo repo, PasswordEncoder passwordEncoder) {
+    public UsersService(UsersRepo repo, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.repo = repo;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     public String register(Users user) {
@@ -22,5 +27,14 @@ public class UsersService {
     }
 
     public String verify(Users user) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getUsername(),
+                        user.getPassword())
+        );
+
+        if (authentication.isAuthenticated()) return "Successfully logged in";
+
+        return "Fail";
     }
 }
