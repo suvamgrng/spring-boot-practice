@@ -23,12 +23,12 @@ public class UsersController {
         return ResponseEntity.ok(service.register(user));
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<String> verify(@RequestBody Users user) {
-        String unverifiedUser = service.verify(user);
-        if (unverifiedUser == null) {
-            return ResponseEntity.badRequest().build();
+        String result = service.verify(user);
+        if (result.equals("Login Failed")) {
+            return ResponseEntity.status(401).body(result);
         }
-        return ResponseEntity.ok(unverifiedUser);
+        return ResponseEntity.ok(result);
     }
 }

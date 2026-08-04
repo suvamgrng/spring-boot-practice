@@ -3,8 +3,10 @@ package com.suvam.teacher.service;
 import com.suvam.teacher.model.Users;
 import com.suvam.teacher.repository.UsersRepo;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +29,19 @@ public class UsersService {
     }
 
     public String verify(Users user) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        user.getPassword())
-        );
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getUsername(),
+                            user.getPassword())
+            );
 
-        if (authentication.isAuthenticated()) return "Successfully logged in";
+            if (authentication.isAuthenticated()) return "Successfully logged in";
 
-        return "Fail";
+            return "Fail";
+
+        } catch (BadCredentialsException e) {
+            return "Login Failed";
+        }
     }
 }

@@ -22,22 +22,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/",
-                                "/register")
+                                "/register",
+                                "/api/login")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(login -> login
+                .authenticationProvider(authenticationProvider)
+                .formLogin(form -> form
                         .defaultSuccessUrl("/teacher")
-                        .permitAll()
-                )
+                        .permitAll())
+                .httpBasic(Customizer.withDefaults())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
                         .permitAll());

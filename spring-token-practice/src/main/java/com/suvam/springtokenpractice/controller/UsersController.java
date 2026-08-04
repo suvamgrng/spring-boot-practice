@@ -22,6 +22,11 @@ public class UsersController {
 
     @PostMapping("/login")
     public String login(@RequestBody Users user) {
-        return service.verify(user);
+        String unverifiedUser = service.verify(user);
+
+        if (unverifiedUser.isEmpty()) {
+            return "Empty";
+        }
+        return unverifiedUser;
     }
 }
