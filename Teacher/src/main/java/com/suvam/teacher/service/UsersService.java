@@ -20,4 +20,7 @@ public class UsersService {
         repo.save(user);
         return "User Registered";
     }
+
+    public String verify(Users user) {
+    }
 }

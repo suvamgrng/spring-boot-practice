@@ -22,4 +22,13 @@ public class UsersController {
         }
         return ResponseEntity.ok(service.register(user));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> verify(@RequestBody Users user) {
+        String unverifiedUser = service.verify(user);
+        if (unverifiedUser == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(unverifiedUser);
+    }
 }
