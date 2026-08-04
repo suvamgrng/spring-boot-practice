@@ -35,7 +35,7 @@ public class UsersService {
                         user.getPassword()
                 ));
 
-        if (authentication.isAuthenticated()) return service.generateToken();
+        if (authentication.isAuthenticated()) return service.generateToken(user.getUsername());
         return "Login Failed";
     }
 }
