@@ -26,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain addSecurityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception {
+    public SecurityFilterChain addSecurityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider, JwtFilter jwtFilter) throws Exception {
         http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(auth -> auth
@@ -41,7 +41,7 @@ public class SecurityConfig {
                         .authenticated()
                 )
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(JwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(Customizer.withDefaults())
                 .logout(log -> log
                         .logoutSuccessUrl("/logout?logout")
