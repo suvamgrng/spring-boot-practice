@@ -23,9 +23,20 @@ public class CustomUserDetails implements UserDetails {
     public @NullMarked Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        Stream.of(users.getRole().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .forEach(authorities::add);
+        if (users.getRole() != null && !users.getRole().isBlank()) {
+
+            Stream.of(users.getRole().split(","))
+                    .map(String::trim)
+                    .map(SimpleGrantedAuthority::new)
+                    .forEach(authorities::add);
+        }
+
+        if (users.getAuthority() != null && !users.getAuthority().isBlank()) {
+            Stream.of(users.getAuthority().split(","))
+                    .map(String::trim)
+                    .map(SimpleGrantedAuthority::new)
+                    .forEach(authorities::add);
+        }
 
         return authorities;
     }

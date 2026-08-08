@@ -1,6 +1,5 @@
 package com.suvam.teacher.service;
 
-import com.suvam.teacher.configuration.SecurityConfig;
 import com.suvam.teacher.model.CustomUserDetails;
 import com.suvam.teacher.model.Users;
 import com.suvam.teacher.repository.UsersRepo;
