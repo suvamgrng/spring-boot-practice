@@ -34,7 +34,7 @@ public class CustomUserDetails implements UserDetails {
         if (users.getAuthority() != null && !users.getAuthority().isBlank()) {
             Stream.of(users.getAuthority().split(","))
                     .map(String::trim)
-                    .map(SimpleGrantedAuthority::new)
+                    .map(r -> new SimpleGrantedAuthority(users.getRole() + "_READ"))
                     .forEach(authorities::add);
         }
 

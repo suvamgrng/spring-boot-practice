@@ -4,6 +4,7 @@ import com.suvam.teacher.model.Teacher;
 import com.suvam.teacher.service.TeacherService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,5 +63,17 @@ public class TeacherController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminOnly() {
+        return "Only ADMIN can access this";
+    }
+
+    @GetMapping("/read")
+    @PreAuthorize("hasAuthority('TEACHER_READ')")
+    public String readTeacher() {
+        return "You have teacher read permission";
     }
 }
