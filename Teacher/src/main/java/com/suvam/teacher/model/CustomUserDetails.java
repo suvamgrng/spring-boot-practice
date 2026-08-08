@@ -6,8 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -19,11 +21,13 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public @NullMarked Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(
-                new SimpleGrantedAuthority(
-                        "ROLE_" + users.getRole()
-                )
-        );
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        Stream.of(users.getRole().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .forEach(authorities::add);
+
+        return authorities;
     }
 
     @Override
