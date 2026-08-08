@@ -23,6 +23,12 @@ public class UsersService {
     }
 
     public String register(Users user) {
+        if (user.getUsername() == null || user.getUsername().isBlank()) {
+            throw new IllegalArgumentException("Username is required");
+        }
+        if (user.getPassword() == null || user.getPassword().isBlank()) {
+            throw new IllegalArgumentException("Password is required");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repo.save(user);
         return "User Registered";
