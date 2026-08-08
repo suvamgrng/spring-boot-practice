@@ -76,4 +76,16 @@ public class TeacherController {
     public String readTeacher() {
         return "You have teacher read permission";
     }
+
+    @GetMapping("/read")
+    @PreAuthorize("hasAuthority('USER_READ')")
+    public String readUser() {
+        return "You have user read permission";
+    }
+
+    @GetMapping("/write")
+    @PreAuthorize("hasAuthority('TEACHER_WRITE')")
+    public String writeTeacher() {
+        return "You have teacher write permission";
+    }
 }
