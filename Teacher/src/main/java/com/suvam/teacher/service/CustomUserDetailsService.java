@@ -3,6 +3,7 @@ package com.suvam.teacher.service;
 import com.suvam.teacher.model.CustomUserDetails;
 import com.suvam.teacher.model.Users;
 import com.suvam.teacher.repository.UsersRepo;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,13 +17,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.repo = repo;
     }
 
+    @Cacheable("users")
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = repo.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
+        Users user = repo.findByUsername(username)
+                .orElseThrow( () -> new UsernameNotFoundException("User not found"));
         return new CustomUserDetails(user);
     }
 }
