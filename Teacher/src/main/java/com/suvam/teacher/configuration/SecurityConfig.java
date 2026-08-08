@@ -29,10 +29,10 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/register",
-                                "/api/login")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated()
+                                "/api/login").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/read/**").hasAuthority("TEACHER_READ").h
+                        .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider)
                 .formLogin(form -> form
